@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ThinkClock</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      #cell-preview {
+        display: none;
+        max-width: 250px;
+        max-height: 250px;
+      }
+    </style>
+  </head>
+
+  <body class="p-2">
+    <div class="md:w-1/2 m-auto">
+      <img
+        src="{{url_for('static', filename='images/logoThinkClock.png')}}"
+        alt="logo"
+      />
+    </div>
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+      <div class="grid grid-cols-3 gap-2">
+        <div class="col-span-1">
+          <div class="relative overflow-x-auto">
+            <table
+              class="w-full text-sm text-left rtl:text-right text-gray-500"
+            >
+              <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                  <th scope="col" class="px-6 py-3" colspan="2">
+                    Meta Information
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for param in meta_params %}
+
+                <tr class="bg-white border-b">
+                  <th
+                    scope="row"
+                    class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap"
+                  >
+                    <label for="Manufacturer"> {{param}} : </label>
+                  </th>
+                  <td class="px-6 py-3">
+                    <input
+                      id="Manufacturer"
+                      tabindex="1"
+                      name="Manufacturer"
+                      type="text"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+                      value="{{meta_params[param]}}"
+                      required
+                    />
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-span-1">
+          <div class="relative overflow-x-auto">
+            <table
+              class="w-full text-sm text-left rtl:text-right text-gray-500"
+            >
+              <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                  <th scope="col" class="px-6 py-3" colspan="2">
+                    Electrical Paramaters
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for param in elect_params %}
+                <tr class="bg-white border-b">
+                  <th
+                    scope="row"
+                    class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap"
+                  >
+                    <label for="Manufacturer"> {{param}} : </label>
+                  </th>
+                  <td class="px-6 py-3">
+                    <input
+                      id="Manufacturer"
+                      tabindex="1"
+                      name="Manufacturer"
+                      type="text"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+                      value="{{elect_params[param]}}"
+                      required
+                    />
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-span-1 border rounded flex gap-2 flex-col">
+          <div class="w-full">
+            <h1
+              class="block mb-2 text-xs font-medium text-gray-900 uppercase bg-gray-50 px-6 py-3 w-full"
+            >
+              Files
+            </h1>
+            <div class="p-3">
+              <label
+                class="block mb-2 text-sm font-medium text-gray-900"
+                for="cell_image"
+                >Upload Cell Image</label
+              >
+              <input
+                class=""
+                id="cell_image"
+                name="cell_image"
+                type="file"
+                accept="image/*"
+                tabindex="2"
+                required
+              />
+            </div>
+            <div class="p-3">
+              <label
+                class="block mb-2 text-sm font-medium text-gray-900"
+                for="cell_data"
+                >Upload Cell Data</label
+              >
+              <input class="" id="cell_data" name="cell_data" type="file"  required accept=".csv" />
+            </div>
+
+            <button
+              type="submit"
+              class="float-right m-5 text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 shadow-lg shadow-blue-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>
